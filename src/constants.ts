@@ -1,5 +1,11 @@
 import { TimeType } from "./types";
 
+export const START_TIMER = 'pomodoro.start';
+export const STOP_TIMER = 'pomodoro.stop';
+export const RESUME_TIMER = 'pomodoro.resume';
+export const RESET_TIMER = 'pomodoro.reset';
+
+
 export const SECOND = 1000;
 export const MINUTE = 60 * 1000;
 export const WORK_TIME = 0.2 * MINUTE;
@@ -8,9 +14,9 @@ export const LONG_BREAK_TIME = 0.15 * MINUTE;
 export const LONG_BREAK_INTERVAL = 2;
 
 export const DISPLAY_FORMAT: Record<TimeType, string> = {
-  [TimeType.work]: '$time [WORK]',
-  [TimeType.shortBreak]: '$time [SHORT BREAK]',
-  [TimeType.longBreak]: '$time [LONG BREAK]',
+  [TimeType.work]: '$icon $time [WORK]',
+  [TimeType.shortBreak]: '$icon $time [SHORT BREAK]',
+  [TimeType.longBreak]: '$icon $time [LONG BREAK]',
 };
 
 export const FINISH_HINT: Record<TimeType, string> = {

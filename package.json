@@ -20,6 +20,14 @@
       {
         "command": "pomodoro.stop",
         "title": "Stop Pomodoro"
+      },
+      {
+        "command": "pomodoro.resume",
+        "title": "Resume Pomodoro"
+      },
+      {
+        "command": "pomodoro.reset",
+        "title": "Reset Pomodoro"
       }
     ]
   },

@@ -1,9 +1,10 @@
 import * as vscode from 'vscode';
 import { Pomodoro } from './pomodoro';
+import { TimeType } from './types';
+import { RESET_TIMER, RESUME_TIMER, START_TIMER, STOP_TIMER } from './constants';
 
-const START_TIMER = 'pomodoro.start';
-const STOP_TIMER = 'pomodoro.stop';
-let myStatusBarItem: vscode.StatusBarItem;
+let statusBar: vscode.StatusBarItem;
+let pomodoro: Pomodoro;
 
 export function activate({ subscriptions }: vscode.ExtensionContext) {
 	subscriptions.push(vscode.commands.registerCommand(START_TIMER, () => {
@@ -12,17 +13,28 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 
 	subscriptions.push(vscode.commands.registerCommand(STOP_TIMER, () => {
 		vscode.window.showInformationMessage('Stop Pomodoro!');
+		pomodoro?.stop();
 	}));
 
-	myStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
-	myStatusBarItem.command = START_TIMER;
-	subscriptions.push(myStatusBarItem);
+	subscriptions.push(vscode.commands.registerCommand(RESUME_TIMER, () => {
+		vscode.window.showInformationMessage('Stop Pomodoro!');
+		pomodoro?.resume();
+	}));
 
-	const pomodoro = new Pomodoro(myStatusBarItem, {
-		onFinish: (s) => vscode.window.showInformationMessage(s),
+	subscriptions.push(vscode.commands.registerCommand(RESET_TIMER, () => {
+		vscode.window.showInformationMessage('Stop Pomodoro!');
+		pomodoro.startWith(TimeType.work);
+	}));
+
+	statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
+	statusBar.command = START_TIMER;
+	subscriptions.push(statusBar);
+
+	pomodoro = new Pomodoro(statusBar, {
+		onFinish: (s) => vscode.window.showWarningMessage(s)
 	});
 
-	pomodoro.start();
+	pomodoro.startWith(TimeType.work);
 }
 
 export function deactivate() {}
