@@ -1,6 +1,6 @@
 {
-  "name": "tomatotimer",
-  "displayName": "TomatoTimer",
+  "name": "pomodoro",
+  "displayName": "Pomodoro",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -14,12 +14,12 @@
   "contributes": {
     "commands": [
       {
-        "command": "tomatotimer.start",
-        "title": "Start TomatoTimer"
+        "command": "pomodoro.start",
+        "title": "Start Pomodoro"
       },
       {
-        "command": "tomatotimer.stop",
-        "title": "Stop TomatoTimer"
+        "command": "pomodoro.stop",
+        "title": "Stop Pomodoro"
       }
     ]
   },
