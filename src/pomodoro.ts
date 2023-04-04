@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
-import { DISPLAY_FORMAT, FINISH_HINT, LONG_BREAK_INTERVAL, LONG_BREAK_TIME, MINUTE, SECOND, SHORT_BREAK_TIME, WORK_TIME } from "./constants";
+import { DISPLAY_FORMAT, FINISH_HINT, LONG_BREAK_INTERVAL_KEY, LONG_BREAK_TIME_KEY, MINUTE, SECOND, SHORT_BREAK_TIME_KEY, WORK_TIME_KEY } from "./constants";
 import { TimeType } from "./types";
-import { padWithZero } from './utils';
+import { getConfiguration, padWithZero } from './utils';
 
 type Callback = {
   onFinish: (s: string) => void,
@@ -9,7 +9,7 @@ type Callback = {
 
 export class Pomodoro {
   private timeType: TimeType = TimeType.work;
-  private timeLast: number = WORK_TIME;
+  private timeLast: number = 0;
   private interval = 0;
   private statusBar: vscode.StatusBarItem;
   private callbacks: Callback;
@@ -59,7 +59,7 @@ export class Pomodoro {
     switch (this.timeType) {
       case 'work':
         this.interval += 1;
-        if (this.interval === LONG_BREAK_INTERVAL) {
+        if (this.interval === this.getLongBreakInterval()) {
           this.updateTimeTypeAndTimeLast(TimeType.longBreak);
         } else {
           this.updateTimeTypeAndTimeLast(TimeType.shortBreak);
@@ -80,18 +80,18 @@ export class Pomodoro {
   private updateTimeTypeAndTimeLast = (timeType: TimeType) => {
     this.timeType = timeType;
     this.updateTimeLast();
-  }
+  };
 
   private updateTimeLast = () => {
     switch (this.timeType) {
       case 'work':
-        this.timeLast = WORK_TIME;
+        this.timeLast = this.getWorkTime();
         break;
       case 'short-break':
-        this.timeLast = SHORT_BREAK_TIME;
+        this.timeLast = this.getShortBreakTime();
         break;
       case 'long-break':
-        this.timeLast = LONG_BREAK_TIME;
+        this.timeLast = this.getLongBreakTime();
         break;
     }
   };
@@ -106,7 +106,13 @@ export class Pomodoro {
 		this.statusBar.show();
   };
 
-  private getStatusIcon = () => {
-    return this.activate ? '$(rocket)' : '$(stop-circle)';
-  }
+  private getStatusIcon = () => this.activate ? '$(rocket)' : '$(stop-circle)';
+
+  private getWorkTime = () => getConfiguration(WORK_TIME_KEY, 25) * MINUTE;
+
+  private getShortBreakTime = () => getConfiguration(SHORT_BREAK_TIME_KEY, 5) * MINUTE;
+
+  private getLongBreakTime = () => getConfiguration(LONG_BREAK_TIME_KEY, 15) * MINUTE;
+
+  private getLongBreakInterval = () => getConfiguration(LONG_BREAK_INTERVAL_KEY, 4);
 }

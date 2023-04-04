@@ -5,13 +5,12 @@ export const STOP_TIMER = 'pomodoro.stop';
 export const RESUME_TIMER = 'pomodoro.resume';
 export const RESET_TIMER = 'pomodoro.reset';
 
-
 export const SECOND = 1000;
 export const MINUTE = 60 * 1000;
-export const WORK_TIME = 0.2 * MINUTE;
-export const SHORT_BREAK_TIME = 0.1 * MINUTE;
-export const LONG_BREAK_TIME = 0.15 * MINUTE;
-export const LONG_BREAK_INTERVAL = 2;
+export const WORK_TIME_KEY = 'conf.pomodoro.work';
+export const SHORT_BREAK_TIME_KEY = 'conf.pomodoro.shortBreak';
+export const LONG_BREAK_TIME_KEY = 'conf.pomodoro.longBreak';
+export const LONG_BREAK_INTERVAL_KEY = 'conf.pomodoro.longBreakInterval';
 
 export const DISPLAY_FORMAT: Record<TimeType, string> = {
   [TimeType.work]: '$icon $time [WORK]',

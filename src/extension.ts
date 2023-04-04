@@ -17,12 +17,12 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 	}));
 
 	subscriptions.push(vscode.commands.registerCommand(RESUME_TIMER, () => {
-		vscode.window.showInformationMessage('Stop Pomodoro!');
+		vscode.window.showInformationMessage('Resume Pomodoro!');
 		pomodoro?.resume();
 	}));
 
 	subscriptions.push(vscode.commands.registerCommand(RESET_TIMER, () => {
-		vscode.window.showInformationMessage('Stop Pomodoro!');
+		vscode.window.showInformationMessage('Reset Pomodoro!');
 		pomodoro.startWith(TimeType.work);
 	}));
 

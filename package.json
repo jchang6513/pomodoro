@@ -29,6 +29,34 @@
         "command": "pomodoro.reset",
         "title": "Reset Pomodoro"
       }
+    ],
+    "configuration": [
+      {
+        "type": "object",
+        "title": "Pomodoro Setting",
+        "properties": {
+          "conf.pomodoro.work": {
+            "type": "number",
+            "default": 25,
+            "description": "Work time in minutes"
+          },
+          "conf.pomodoro.shortBreak": {
+            "type": "number",
+            "default": 5,
+            "description": "Short break time in minutes"
+          },
+          "conf.pomodoro.longBreak": {
+            "type": "number",
+            "default": 15,
+            "description": "Long break time in minutes"
+          },
+          "conf.pomodoro.longBreakInterval": {
+            "type": "number",
+            "default": 4,
+            "description": "Long break interval (times of short break)"
+          }
+        }
+      }
     ]
   },
   "scripts": {
