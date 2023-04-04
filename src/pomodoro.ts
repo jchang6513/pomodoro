@@ -37,6 +37,16 @@ export class Pomodoro {
     this.updateStatusBar();
   };
 
+  public toggle() {
+    if (this.activate) {
+      this.activate = false;
+      this.updateStatusBar();
+    } else {
+      this.activate = true;
+      this.start();
+    }
+	}
+
   private start = () => {
     if (!this.activate) {
       return;

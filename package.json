@@ -28,6 +28,10 @@
       {
         "command": "pomodoro.reset",
         "title": "Reset Pomodoro"
+      },
+      {
+        "command": "pomodoro.toggle",
+        "title": "Toggle Pomodoro"
       }
     ],
     "configuration": [

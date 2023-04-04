@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { Pomodoro } from './pomodoro';
 import { TimeType } from './types';
-import { RESET_TIMER, RESUME_TIMER, START_TIMER, STOP_TIMER } from './constants';
+import { RESET_TIMER, RESUME_TIMER, START_TIMER, STOP_TIMER, TOGGLE_TIMER } from './constants';
 
 let statusBar: vscode.StatusBarItem;
 let pomodoro: Pomodoro;
@@ -26,8 +26,13 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 		pomodoro.startWith(TimeType.work);
 	}));
 
+	subscriptions.push(vscode.commands.registerCommand(TOGGLE_TIMER, () => {
+		pomodoro.toggle();
+	}));
+
+
 	statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
-	statusBar.command = START_TIMER;
+	statusBar.command = TOGGLE_TIMER;
 	subscriptions.push(statusBar);
 
 	pomodoro = new Pomodoro(statusBar, {

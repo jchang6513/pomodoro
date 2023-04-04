@@ -4,6 +4,7 @@ export const START_TIMER = 'pomodoro.start';
 export const STOP_TIMER = 'pomodoro.stop';
 export const RESUME_TIMER = 'pomodoro.resume';
 export const RESET_TIMER = 'pomodoro.reset';
+export const TOGGLE_TIMER = 'pomodoro.toggle';
 
 export const SECOND = 1000;
 export const MINUTE = 60 * 1000;
