@@ -2,6 +2,9 @@ import * as vscode from 'vscode';
 import { Pomodoro } from './pomodoro';
 import { TimeType } from './types';
 import { RESET_TIMER, RESUME_TIMER, START_TIMER, STOP_TIMER, TOGGLE_TIMER } from './constants';
+import path = require('path');
+
+var player = require('play-sound')({});
 
 let statusBar: vscode.StatusBarItem;
 let pomodoro: Pomodoro;
@@ -35,8 +38,15 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 	statusBar.command = TOGGLE_TIMER;
 	subscriptions.push(statusBar);
 
+	const workEndSound = path.join(__dirname, '../audio/work-end.wav');
+	const breakEndSound = path.join(__dirname, '../audio/break-end.wav');
+
 	pomodoro = new Pomodoro(statusBar, {
-		onFinish: (s) => vscode.window.showWarningMessage(s)
+		onFinish: (s) => {
+			vscode.window.showWarningMessage(s);
+			player.play(breakEndSound);
+			player.play(workEndSound);
+		}
 	});
 
 	pomodoro.startWith(TimeType.work);
