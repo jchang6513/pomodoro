@@ -10,3 +10,5 @@ A Pomodoro extension for vsc.
 - Long Break Time: Long Break Time in minutes in each cycle.
 - Long Break Interval: Cycle of works to have a long break.
 
+# Credit
+- Sound Effect: https://mixkit.co/free-sound-effects/
